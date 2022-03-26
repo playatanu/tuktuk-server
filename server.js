@@ -3,8 +3,7 @@ const express = require('express');
 const app = express();
 const server = require('http').createServer(app);
 
-const WebSocket = require('ws');
-const wss = new WebSocket.Server({ server: server });
+module.exports = server;
 
 const connectdb = require('./db');
 connectdb();
@@ -18,13 +17,6 @@ app.use(express.urlencoded());
 
 app.use('/rider', require('./routes/riderRoutes'));
 app.use('/driver', require('./routes/driverRoutes'));
+app.use('/user', require('./routes/userRoutes'));
 
 server.listen(5000, () => console.log('server running at 5000'));
-
-wss.on('connection', (ws, req) => {
-  ws.id = req.headers['email'];
-});
-
-const clients = wss.clients;
-
-module.exports = clients;

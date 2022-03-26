@@ -14,4 +14,8 @@ router.post('/cancel', (req, res) => {
   book.cancel(req, res);
 });
 
+router.post('/close', (req, res) => {
+  book.close(req, res);
+});
+
 module.exports = router;
